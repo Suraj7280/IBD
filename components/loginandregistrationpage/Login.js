@@ -1,142 +1,116 @@
 import React, { useState } from 'react';
-import {View,Text,StyleSheet,Image,TextInput, Button,TouchableOpacity ,Alert} from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity, Alert } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Registration from './Registration';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const Login = ({ navigation, onLogin }) => {
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginFailed, setLoginFailed] = useState(false);
 
-const Login= ({navigation,onLogin}) =>{
-    
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [loginFailed, setLoginFailed] = useState(false);
-    
+  const handleLogin = async () => {
+    console.log('Username:', username);
+    console.log('Password:', password);
+    try {
+      const response = await axios.post('http://10.0.2.2:3000/login', { username, password });
+      if (response.status === 200) {
+        await AsyncStorage.setItem('username', username);
+        onLogin();
+        Alert.alert('Login successful');
+      } else {
+        setLoginFailed(true);
+        Alert.alert('Login failed');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const handleLogin = async () => {
-        console.log('Username:', username);
-        console.log('Password:', password);
-        try {
-          const response = await axios.post('http://10.0.2.2:3000/login', { username, password });
-          if (response.status === 200) {
-            await AsyncStorage.setItem('username', username);
-           // await AsyncStorage.setItem('isLoggedIn', 'true');
-           onLogin();
-            
-            Alert.alert('Login successful');
-          } else {
-            setLoginFailed(true);
-            Alert.alert('Login failed');
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      };
-
-
-    return(
-        <View style={styles.container}>
-            <View style={styles.box}>
-                <View style={styles.boxcontent}>
-                    
-                    <Image
-        source={require('../images/userlogin.png')} 
-        style={{height: 170, width: 170,top:-10}}
-      />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Username"
-                        onChangeText={setUsername}
-                        value={username}
-                        placeholderTextColor='white'
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Password"
-                        onChangeText={setPassword}
-                        value={password}
-                        secureTextEntry={true}
-                        placeholderTextColor='white'
-                    />
-                    
-                </View>
-                
-           </View>
-           <View style={styles.forge}>
-                       
-                       <View>
-                       <TouchableOpacity onPress={() => navigation.navigate(Registration)}>
-                       <Text style={styles.sign}>SignUp?</Text>
-                       </TouchableOpacity>
-                       </View>
-                       
-                       <View>
-                       <Text style={styles.forg}>Forget Password?</Text>
-                       </View>
-            </View>
-            {loginFailed && <Text style={styles.errorText}>Login failed. Please try again.</Text>}
-                   <View style={styles.loginbox}>
-                      <Button title="Login"  onPress={handleLogin} />
-                   </View>
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      {/* <Image
+        source={require('../images/userlogin.png')}
+        style={styles.logo}
+      /> */}
+      <View style={styles.inputContainer}>
+        <Text style={styles.title}>Welcome Back!</Text>
+        <Text style={styles.subtitle}>Login to continue</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          onChangeText={setUsername}
+          value={username}
+          placeholderTextColor='white'
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry={true}
+          placeholderTextColor='white'
+        />
+        {loginFailed && <Text style={styles.errorText}>Login failed. Please try again.</Text>}
+        <Button title="Login" onPress={handleLogin} />
+        <TouchableOpacity onPress={() => navigation.navigate(Registration)}>
+          <Text style={styles.link}>Sign Up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.link}>Forget Password?</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'blueviolet',
-      opacity:1,
-      color:'white'
-    },
-    box:{
-        height:450,
-        width:310,
-        
-       
-    },
-    boxcontent:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        top:30
-    },
-    input: {
-        width: '100%',
-        height: 50,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        color:'white',
-      },
-    loginbox:{
-        width:300,
-        bottom:90,
-    },
-    forg:{
-        color:'white',
-        
-        fontWeight:'bold',
-        
-    },
-    errorText: {
-        color: 'red',
-        marginBottom: 10,
-      },
-    
-    forge:{
-        display:'flex',
-       flexDirection:'row',
-       gap:130,
-       bottom:120
-    },
-    sign:{
-        color:'white',
-        
-    }
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'blueviolet',
+  },
+  logo: {
+    width: wp('40%'), // Adjust the logo size dynamically
+    height: wp('40%'),
+    marginBottom: hp('5%'), // Adjust spacing dynamically
+  },
+  inputContainer: {
+    width: wp('80%'), // Adjust the container width dynamically
+  },
+  title: {
+    fontSize: hp('4%'), // Adjust title font size dynamically
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: hp('1%'), // Adjust spacing dynamically
+  },
+  subtitle: {
+    fontSize: hp('2%'), // Adjust subtitle font size dynamically
+    color: 'white',
+    marginBottom: hp('3%'), // Adjust spacing dynamically
+  },
+  input: {
+    height: hp('5%'), // Adjust input height dynamically
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: wp('2%'), // Adjust border radius dynamically
+    paddingHorizontal: wp('3%'), // Adjust padding dynamically
+    marginBottom: hp('2%'), // Adjust spacing dynamically
+    color: 'white',
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: hp('2%'), // Adjust spacing dynamically
+  },
+  link: {
+    color: 'white',
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    marginBottom: hp('2%'), // Adjust spacing dynamically
+  },
 });
 
 export default Login;

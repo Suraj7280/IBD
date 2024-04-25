@@ -19,6 +19,10 @@ import Search from './components/search/Search';
 import Symptomdata from './components/symptomdata/Symptomdata';
 import FoodItem from './components/fooditem/FoodItem';
 import Waterintake from './components/waterintake/Waterintake';
+import Symptomsuggestion from './components/symptomsuggestion/Symptomsuggestion';
+import TriggeredItems from './components/triggereditems/TriggeredItems';
+import Triggerrecommendation from './components/triggerrecommendation/Triggerrecommendation';
+import Chatbot from './components/chatbot/Chatbot';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,7 +72,10 @@ const App = () => {
             <Stack.Screen name="Symptomdata" component={Symptomdata} />
             <Stack.Screen name="FoodItem" component={FoodItem} />
             <Stack.Screen name="Waterintake" component={Waterintake} />
-            
+            <Stack.Screen name="Symptomsuggestion" component={Symptomsuggestion} />
+            <Stack.Screen name="TriggeredItems" component={TriggeredItems} />
+            <Stack.Screen name="Triggerrecommendation" component={Triggerrecommendation} />
+            <Stack.Screen name="Chatbot" component={Chatbot} />
           </>
         ) : (
           <>

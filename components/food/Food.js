@@ -16,6 +16,7 @@ const Food = ({navigation}) => {
   const [snacks, setSnacks] = useState('');
   const [water, setWater] = useState('');
   const [stressLevel, setStressLevel] = useState('');
+  const [triggeredFood, setTriggeredFood] = useState('');
 
 
   const [error, setError] = useState('');
@@ -31,7 +32,7 @@ const Food = ({navigation}) => {
   }, []);
 
   const handleFormSubmit = async () => {
-    if (!username || !date || !breakfast || !lunch || !dinner || !snacks || !water || !stressLevel) {
+    if (!username || !date || !breakfast || !lunch || !dinner || !snacks || !water || !stressLevel || !triggeredFood) {
         Alert.alert('Error', 'Please fill in all details.');
         return;
       }
@@ -44,8 +45,8 @@ const Food = ({navigation}) => {
       dinner,
       snacks,
       water,
-      stressLevel
-
+      stressLevel,
+      triggeredFood
     };
 
     console.log('Form Data:', formData);
@@ -59,7 +60,7 @@ const Food = ({navigation}) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Form data submitted:', data);
+        Alert.alert('Form data submitted:', data);
         // Reset form after successful submission
        setDate('')
        setBreakfast('')
@@ -69,6 +70,7 @@ const Food = ({navigation}) => {
        setStressLevel('')
        setWater('')
        setUsername('')
+       setTriggeredFood('')
       })
       .catch(error => {
         console.error('Error submitting form data:', error);
@@ -174,6 +176,18 @@ const Food = ({navigation}) => {
      </View>
      
      </View>
+
+     <View style={{padding:2, backgroundColor:'white'}}>
+        <View style={styles.dateconstainer}>
+      <Text style={styles.textdesign}> Triggered Food</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Triggered Food"
+        value={triggeredFood}
+        onChangeText={setTriggeredFood}
+      />
+     </View>
+      </View>
       
      
      

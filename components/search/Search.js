@@ -4,6 +4,9 @@ import Symptomdata from '../symptomdata/Symptomdata';
 import FoodItem from '../fooditem/FoodItem';
 import Waterintake from '../waterintake/Waterintake';
 import Footer from '../footer/Footer';
+import Symptomsuggestion from '../symptomsuggestion/Symptomsuggestion';
+import Triggerrecommendation from '../triggerrecommendation/Triggerrecommendation';
+import Chatbot from '../chatbot/Chatbot';
 
 const Search = ({ navigation }) => {
     const { height } = Dimensions.get('window');
@@ -30,7 +33,26 @@ const Search = ({ navigation }) => {
             <Text style={styles.item}>Water Intake Data</Text>
           </View>
         </TouchableOpacity>
-        <View style={styles.separator} /></View>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Symptomsuggestion)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>Suggestion Based On Symptom Data</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Triggerrecommendation)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>User Analysis</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Chatbot)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>User ChatBot</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        </View>
         
         <View>
             <Footer />

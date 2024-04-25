@@ -26,6 +26,7 @@ const Home= ({navigation}) =>{
     return(
         <View style={styles.container}>
             <View style={{flex: .8}}>
+                
                 <View style={styles.upperheader}>
                     <View style={styles.upperheadercontent}>
                     <View style={styles.username}>

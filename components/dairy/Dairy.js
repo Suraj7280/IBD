@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity,Image, StyleSheet } from 'react-native';
 import Symptoms from '../symptoms/Symptoms';
 import Food from '../food/Food';
 import Footer from '../footer/Footer';
+import TriggeredItems from '../triggereditems/TriggeredItems';
 
 
 const Dairy = ({navigation}) => {
@@ -25,6 +26,12 @@ const Dairy = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate(Food)}>
           <View style={styles.itemContainer}>
             <Text style={styles.item}>Food Details</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(TriggeredItems)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>Triggered Items</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />

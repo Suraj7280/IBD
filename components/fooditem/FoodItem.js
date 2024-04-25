@@ -28,7 +28,7 @@ const FoodItem = ({ navigation }) => {
       const htmlContent = generateHTML(symptomsData);
       const options = {
         html: htmlContent,
-        fileName: 'symptoms_data',
+        fileName: 'food_data',
         directory: 'Documents',
       };
       const pdf = await RNHTMLtoPDF.convert(options);
@@ -48,17 +48,20 @@ const FoodItem = ({ navigation }) => {
         <td>${item.snacks}</td>
         <td>${item.water}</td>
         <td>${item.stressLevel}</td>
+        <td>${item.triggeredFood}</td>
       </tr>`
     ));
     return `
       <html>
         <head>
+        <title>IBD Companion App</title>
           <style>
             table { width: 100%; border-collapse: collapse; }
             th, td { border: 1px solid #000; padding: 8px; }
           </style>
         </head>
         <body>
+        <h1 style="text-align: center;">IBD Companion App</h1>
           <table>
             <thead>
               <tr>
@@ -69,6 +72,7 @@ const FoodItem = ({ navigation }) => {
                 <th>Snacks</th>
                 <th>Water Intake</th>
                 <th>Stress Level</th>
+                <th>Triggered Food</th>
               </tr>
             </thead>
             <tbody>
@@ -88,11 +92,11 @@ const FoodItem = ({ navigation }) => {
         <View>
           <Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>
             <Row
-              data={['Date', 'Breakfast', 'Lunch', 'Dinner', 'Snacks', 'Water Intake', 'Stress Level']}
+              data={['Date', 'Breakfast', 'Lunch', 'Dinner', 'Snacks', 'Water Intake', 'Stress Level','Triggered Food']}
               style={styles.head}
               textStyle={styles.headText}
             />
-            <Rows data={symptomsData.map((item, index) => [item.date, item.breakfast, item.lunch, item.dinner, item.snacks, item.water, item.stressLevel])} textStyle={styles.text} />
+            <Rows data={symptomsData.map((item, index) => [item.date, item.breakfast, item.lunch, item.dinner, item.snacks, item.water, item.stressLevel,item.triggeredFood])} textStyle={styles.text} />
           </Table>
         </View>
       </ScrollView>

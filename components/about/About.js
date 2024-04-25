@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40, // Make the image round
   },
+  
   description: {
     textAlign: 'center',
     fontSize: 16,

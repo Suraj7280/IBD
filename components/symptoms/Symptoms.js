@@ -77,17 +77,6 @@ const Symptoms = ({navigation}) => {
    });
 
 
-      // axios.post('http://10.0.2.2:5000/symptoms', {username,date,stoolConsistency,painPassingStool: painPassingStool ==='yes' || painPassingStool==='Yes' || painPassingStool==='YES' ? 1 :0,stoolColor,stoolFrequency,mucousInStool: mucousInStool ==='yes' ? 1 : 0, bloodInStool: bloodInStool ==='yes' ? 1 : 0,painLocation, fever: fever ==='yes' ? 1 : 0,nausea: nausea ==='yes' ? 1 : 0,flatulence: flatulence ==='yes' ? 1 : 0,})
-      // .then(response => {
-      //   if (response.status === 200) {
-      //       console.log('form submitted');
-      //     } else {
-      //       console.log('registration failed');
-      //     }
-      // })
-    
-      // .catch(error => console.error(error));
-
 
 
   };

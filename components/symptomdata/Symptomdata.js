@@ -65,6 +65,7 @@ const Symptomdata = ({ navigation }) => {
           </style>
         </head>
         <body>
+        <h1 style="text-align: center;">IBD Companion App</h1>
           <table>
             <thead>
               <tr>
@@ -101,7 +102,7 @@ const Symptomdata = ({ navigation }) => {
               style={styles.head}
               textStyle={styles.headText}
             />
-            <Rows data={symptomsData.map((item, index) => [item.date, item.stoolConsistency, item.stoolColour, item.stoolFrequency, item.painLocation, item.painPassingStool, item.mucousInStool, item.bloodInStool, item.fever, item.nausea, item.flatulence])} textStyle={styles.text} />
+            <Rows data={symptomsData.map((item, index) => [item.date, item.stoolConsistency, item.stoolColor, item.stoolFrequency, item.painLocation, item.painPassingStool, item.mucousInStool, item.bloodInStool, item.fever, item.nausea, item.flatulence])} textStyle={styles.text} />
           </Table>
         </View>
       </ScrollView>
