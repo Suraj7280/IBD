@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Alert, ScrollView, StyleSheet } from 'react-native';
+import { View,  FlatList,Text, TextInput, Button, Alert, ScrollView, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 
 const Chatbot = () => {
   const [symptomData, setSymptomData] = useState('');
+  const [foodData, setFoodData] = useState('');
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState([]);
+  console.log(symptomData)
+  console.log(foodData)
 
   useEffect(() => {
     fetchData();
+    fetchDataone();
   }, []);
 
   const fetchData = async () => {
@@ -20,8 +24,21 @@ const Chatbot = () => {
         Alert.alert('User ID not found');
         return;
       }
-      const response = await axios.get(`http://10.0.2.2:3000/medicationfood/${userId}`);
+      const response = await axios.get(`http://10.0.2.2:3000/symptomschat/${userId}`);
       setSymptomData(response.data);
+    } catch (error) {
+      console.error('Error fetching symptoms data:', error);
+    }
+  };
+  const fetchDataone = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('username');
+      if (!userId) {
+        Alert.alert('User ID not found');
+        return;
+      }
+      const response = await axios.get(`http://10.0.2.2:3000/foodchat/${userId}`);
+      setFoodData(response.data);
     } catch (error) {
       console.error('Error fetching symptoms data:', error);
     }
@@ -34,7 +51,7 @@ const Chatbot = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ food_data: symptomData[0]?.breakfast, symptom_data: symptomData[0]?.name, prompt: prompt }),
+        body: JSON.stringify({ food_data: symptomData, symptom_data: foodData, prompt: prompt }),
       });
       const { processedData } = await response.json();
       setMessages(prevMessages => [...prevMessages, processedData]); // Add new message to existing messages
@@ -45,11 +62,42 @@ const Chatbot = () => {
     }
   };
 
+ 
+    const data = [
+      { id: '1', text: 'eat' },
+      { id: '2', text: 'stool consistency' },
+      { id: '3', text: 'symptoms' },
+      { id: '4', text: 'pain while passing stool' },
+      { id: '5', text: 'stool colour' },
+      { id: '6', text: 'stool frequency' },
+      { id: '7', text: 'mucous in stool' },
+      { id: '8', text: 'blood in stool' },
+      { id: '9', text: 'pain location' },
+      { id: '10', text: 'food triggers' },
+      { id: '11', text: 'dietary advice' },
+    ];
+  
+    const renderItem = ({ item }) => (
+      <View style={styles.item}>
+        <Text style={styles.itemtext}>{item.text}</Text>
+      </View>
+    );
+  
+
   return (
     <>
     <View style={styles.header}>
           <Text style={styles.title}>ChatBot</Text>
         </View>
+        <View style={styles.flatListContainer}>
+          <Text style={{color:'black',left:5}}>Use These Keywords:</Text>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          horizontal
+        />
+      </View>
         <View style={styles.container}>
        
       <ScrollView contentContainerStyle={styles.chatContainer}>
@@ -88,6 +136,10 @@ const styles = StyleSheet.create({
    
 
   },
+  flatListContainer: {
+    height: '8%',
+    
+  },
   chatBubble: {
     backgroundColor: '#ffffff',
     borderRadius: 10,
@@ -119,6 +171,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  item:{
+    top:5,
+    marginLeft:5,
+    backgroundColor:'blueviolet',
+    height:25,
+    width:200,
+    borderRadius:5
+  },
+  itemtext:{
+    color:'white',
+    textAlign:'center'
+  }
 });
 
 export default Chatbot;

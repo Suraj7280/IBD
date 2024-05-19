@@ -63,10 +63,10 @@ const Medication = () => {
           data={medications}
           renderItem={({ item }) => (
             <View style={styles.medication}>
-              <Text style={styles.medicationName}>{item.name}</Text>
-              <Text style={{ color: 'white' }}>{`Dosages: ${item.dosage}`}</Text>
-              <Text style={{ color: 'white' }}>{`Frequency: ${item.frequency}`}</Text>
-              <Text style={{ color: 'white' }}>{`Date: ${item.date_added}`}</Text>
+              <Text style={styles.medicationName}>{item?.name}</Text>
+              <Text style={{ color: 'white' }}>{`Dosages: ${item?.dosage}`}</Text>
+              <Text style={{ color: 'white' }}>{`Frequency: ${item?.frequency}`}</Text>
+              <Text style={{ color: 'white' }}>{`Date: ${item?.date_added}`}</Text>
             </View>
           )}
           keyExtractor={(item, index) => index.toString()}

@@ -60,7 +60,7 @@ const Food = ({navigation}) => {
     })
       .then(response => response.json())
       .then(data => {
-        Alert.alert('Form data submitted:', data);
+        console.log('Form data submitted:', data);
         // Reset form after successful submission
        setDate('')
        setBreakfast('')

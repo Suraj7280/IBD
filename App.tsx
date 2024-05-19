@@ -23,6 +23,13 @@ import Symptomsuggestion from './components/symptomsuggestion/Symptomsuggestion'
 import TriggeredItems from './components/triggereditems/TriggeredItems';
 import Triggerrecommendation from './components/triggerrecommendation/Triggerrecommendation';
 import Chatbot from './components/chatbot/Chatbot';
+import Forget from './components/loginandregistrationpage/Forget';
+import Bmi from './components/bmi/Bmi';
+import Calories from './components/calories/Calories';
+import Calorieswomen from './components/calorieswomen/Calorieswomen';
+import Analysis from './components/analysis/Analysis';
+import Graphs from './components/graphs/Graphs';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -76,6 +83,12 @@ const App = () => {
             <Stack.Screen name="TriggeredItems" component={TriggeredItems} />
             <Stack.Screen name="Triggerrecommendation" component={Triggerrecommendation} />
             <Stack.Screen name="Chatbot" component={Chatbot} />
+            <Stack.Screen name="Bmi" component={Bmi} />
+            <Stack.Screen name="Calories" component={Calories} />
+            <Stack.Screen name="Calorieswomen" component={Calorieswomen} />
+            <Stack.Screen name="Analysis" component={Analysis} />
+            <Stack.Screen name="Graphs" component={Graphs} />
+
           </>
         ) : (
           <>
@@ -84,6 +97,7 @@ const App = () => {
               {({ navigation }) => <Login navigation={navigation} onLogin={() => setIsLoggedIn(true)} />}
             </Stack.Screen>
             <Stack.Screen name="Registration" component={Registration} />
+            <Stack.Screen name="Forget" component={Forget} />
           </>
         )}
       </Stack.Navigator>

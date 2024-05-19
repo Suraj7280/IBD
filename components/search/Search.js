@@ -8,6 +8,9 @@ import Symptomsuggestion from '../symptomsuggestion/Symptomsuggestion';
 import Triggerrecommendation from '../triggerrecommendation/Triggerrecommendation';
 import Chatbot from '../chatbot/Chatbot';
 
+import Analysis from '../analysis/Analysis';
+import Graphs from '../graphs/Graphs';
+
 const Search = ({ navigation }) => {
     const { height } = Dimensions.get('window');
   return (
@@ -49,6 +52,18 @@ const Search = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate(Chatbot)}>
           <View style={styles.itemContainer}>
             <Text style={styles.item}>User ChatBot</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Analysis)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>Analysis</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Graphs)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>Graphs</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />

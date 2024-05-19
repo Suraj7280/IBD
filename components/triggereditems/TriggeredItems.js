@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet,Alert } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Footer from '../footer/Footer';
 
 const TriggeredItems = () => {
 
@@ -47,8 +48,14 @@ const TriggeredItems = () => {
     
 
   return (
+    <>
+     <View style={styles.header}>
+        <Text style={styles.headerText}>Triggered Items Collection</Text>
+      </View>
     <View style={styles.container}>
-      <Text style={styles.title}>Triggered Items Collection</Text>
+     
+      
+      
 
       <View style={styles.optionContainer}>
         <Text style={styles.optionText}>Spicy Foods</Text>
@@ -197,7 +204,9 @@ const TriggeredItems = () => {
       <TouchableOpacity style={styles.submitButton} onPress={sendDataToBackend}>
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
+      <Footer />
     </View>
+    </>
   );
 };
 
@@ -208,19 +217,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
+ 
   optionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    top:-30
   },
   optionText: {
     fontSize: 18,
-    marginRight: 10,
+    marginRight: 30,
     flex: 1,
   },
   optionButtonsContainer: {
@@ -246,10 +252,22 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 5,
+    top:-20
   },
   submitButtonText: {
     fontSize: 18,
     color: '#fff',
+  },
+  header: {
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    backgroundColor: 'blueviolet',
+    
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 

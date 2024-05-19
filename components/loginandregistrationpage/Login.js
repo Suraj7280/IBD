@@ -4,6 +4,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Registration from './Registration';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import Forget from './Forget';
 
 const Login = ({ navigation, onLogin }) => {
 
@@ -58,7 +60,7 @@ const Login = ({ navigation, onLogin }) => {
         <TouchableOpacity onPress={() => navigation.navigate(Registration)}>
           <Text style={styles.link}>Sign Up</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate(Forget)}>
           <Text style={styles.link}>Forget Password?</Text>
         </TouchableOpacity>
       </View>

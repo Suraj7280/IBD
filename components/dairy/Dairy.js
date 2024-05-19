@@ -6,6 +6,9 @@ import Symptoms from '../symptoms/Symptoms';
 import Food from '../food/Food';
 import Footer from '../footer/Footer';
 import TriggeredItems from '../triggereditems/TriggeredItems';
+import Bmi from '../bmi/Bmi';
+import Calories from '../calories/Calories';
+import Calorieswomen from '../calorieswomen/Calorieswomen';
 
 
 const Dairy = ({navigation}) => {
@@ -15,7 +18,7 @@ const Dairy = ({navigation}) => {
     <>
     <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>Add Details</Text>
+          <Text style={styles.title}>Dairy</Text>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate(Symptoms)}>
           <View style={styles.itemContainer}>
@@ -32,6 +35,24 @@ const Dairy = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate(TriggeredItems)}>
           <View style={styles.itemContainer}>
             <Text style={styles.item}>Triggered Items</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Bmi)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>BMI Calculator</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Calories)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>Men's Calories Calculator</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity onPress={() => navigation.navigate(Calorieswomen)}>
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>Women's Calories Calculator</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />

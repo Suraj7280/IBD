@@ -25,7 +25,7 @@ const Home= ({navigation}) =>{
     
     return(
         <View style={styles.container}>
-            <View style={{flex: .8}}>
+            <ScrollView style={{flex: .8}}>
                 
                 <View style={styles.upperheader}>
                     <View style={styles.upperheadercontent}>
@@ -40,12 +40,12 @@ const Home= ({navigation}) =>{
             <Text style={styles.features}>Features</Text>
                 <View style={styles.featurecontainer}>
                 <TouchableOpacity onPress={() => navigation.navigate(Waterreminder)}>
-                    <View style={styles.featurebox}>
+                    <View style={styles.featureboxw}>
                     <Image
                     source={require('../images/water.png')} 
                     style={{height: 160, width: 160,top:12}}
                 />
-                <Text style={{color:'white',top:-25,fontWeight:'bold',backgroundColor:'black',textAlign:'center'}}>Water Intake Tracker</Text>
+                <Text style={{color:'white',top:10,fontWeight:'bold',backgroundColor:'black',textAlign:'center'}}>Water Intake Tracker</Text>
                     </View>
                     </TouchableOpacity>
 
@@ -74,26 +74,22 @@ const Home= ({navigation}) =>{
                 <Text style={{color:'white',top:-15,fontWeight:'bold',backgroundColor:'black',textAlign:'center'}}>IBD Tips Screen</Text>
                     </View></TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate(Medication)}>
-                    <View style={styles.featurebox}>
+                    <View style={styles.featureboxm}>
                     <Image
                     source={require('../images/pills.png')} 
                     style={{height: 150, width: 150,top:15,left:0}}
                 />
-                <Text style={{color:'white',top:-15,fontWeight:'bold',backgroundColor:'black',textAlign:'center'}}>Medication List</Text>
+                <Text style={{color:'white',top:30,fontWeight:'bold',backgroundColor:'black',textAlign:'center'}}>Medication List</Text>
                     </View>
                     </TouchableOpacity>
                     
                 </View>
             </View>
-           </View>
+           </ScrollView>
            <Footer />
         </View>
     )
 }
-// git branch -m main IbdFrontend
-// git fetch origin
-// git branch -u origin/IbdFrontend IbdFrontend
-// git remote set-head origin -a
 
 const styles = StyleSheet.create({
     container: {
@@ -148,6 +144,23 @@ const styles = StyleSheet.create({
         height:170,
         width:150,
         borderRadius:20
+        
+    },
+    featureboxw:{
+        backgroundColor:'blueviolet',
+        height:230,
+        width:150,
+        borderRadius:20,
+        elevation: 15
+    },
+    featureboxm:{
+        backgroundColor:'blueviolet',
+        height:230,
+        width:150,
+        top:-60,
+        borderRadius:20,
+        elevation: 15,
+        
     }
     
 });
