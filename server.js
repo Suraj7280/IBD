@@ -90,6 +90,55 @@ app.post('/login', (req, res) => {
   });
 });
 
+//forget password
+app.post('/reset-password', (req, res) => {
+  const { username, email } = req.body;
+ 
+  // Query to select user data based on username and email
+  const query = `SELECT * FROM register WHERE username = '${username}' AND email = '${email}'`;
+  // Execute the query
+  db.query(query, (error, results) => {
+    if (error) {
+      console.error('Error executing MySQL query:', error);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.length > 0) {
+      // User found, return user data
+      const user = results[0];
+     
+      res.status(200).json({ user });
+    } else {
+      // User not found
+      res.status(404).json({ message: 'User not found' });
+    }
+  });
+});
+
+app.post('/update-password', (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body)
+  const hashedPassword = bcrypt.hashSync(password, 10); // Hash the new password
+
+  // Update password query
+  const query = `UPDATE register SET password = '${hashedPassword}' WHERE username = '${username}'`;
+
+  // Execute the query
+  db.query(query, (error, results) => {
+    if (error) {
+      console.error('Error executing MySQL query:', error);
+      res.status(500).json({ message: 'Internal server error' });
+      return;
+    }
+    if (results.affectedRows > 0) {
+      // Password updated successfully
+      res.status(200).json({ message: 'Password updated successfully' });
+    } else {
+      // User not found
+      res.status(404).json({ message: 'User not found' });
+    }
+  });
+});
 
 
 app.post('/symptoms', (req, res) => {
@@ -246,6 +295,34 @@ app.get('/food/:userId', (req, res) => {
   });
 });
 
+app.get('/symptomschat/:userId', (req, res) => {
+  const userId = req.params.userId;
+  console.log(userId);
+  const sql = `SELECT * FROM symptoms WHERE username = ${userId} ORDER BY date DESC LIMIT 1`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching data from database:', err);
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    }
+    res.json(result);
+  });
+});
+
+app.get('/foodchat/:userId', (req, res) => {
+  const userId = req.params.userId;
+  
+  const sql = `SELECT * FROM food WHERE username = ${userId} ORDER BY date DESC LIMIT 1`;
+  console.log(sql);
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching data from database:', err);
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    }
+    res.json(result);
+  });
+});
 
 
 let medications = [];
@@ -443,10 +520,10 @@ app.get('/medicationfood/:userId', (req, res) => {
 
   const query = `
     SELECT *
-    FROM medication
-    JOIN food ON medication.username = food.username
-    WHERE medication.username = ?
-    ORDER BY medication.date_added DESC, food.date DESC
+    FROM symptoms
+    JOIN food ON symptoms.username = food.username
+    WHERE symptoms.username = ?
+    ORDER BY symptoms.date DESC, food.date DESC
   `;
 
   // Execute the query
